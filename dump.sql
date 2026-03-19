@@ -1,5 +1,5 @@
 
-CREATE DATABASE IF NOT EXISTS rappelFacile;
+CREATE DATABASE IF NOT EXISTS rappelFacile DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE rappelFacile;
 
 DROP TABLE IF EXISTS Rappel;
