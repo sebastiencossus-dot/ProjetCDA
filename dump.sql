@@ -36,8 +36,7 @@ CREATE TABLE Prestataire (
     Id_Prestataire INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(50) NOT NULL,
     prenom VARCHAR(50) NOT NULL,
-    profession VARCHAR(50) NOT NULL
-    );
+  );
 
 -- =========================
 -- TABLE ADRESSE
@@ -55,7 +54,13 @@ CREATE TABLE Adresse (
 -- =========================
 CREATE TABLE Profession (
     Id_Profession INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(50) NOT NULL
+    id_prestataire INT NOT NULL,
+    nom VARCHAR(50) NOT NULL,
+
+    CONSTRAINT fk_profession_prestataire
+        FOREIGN KEY (id_prestataire)
+        REFERENCES Prestataire(Id_Prestataire)
+        ON DELETE CASCADE
 );
 
 -- =========================
@@ -63,7 +68,13 @@ CREATE TABLE Profession (
 -- =========================
 CREATE TABLE Categorie (
     Id_Categorie INT AUTO_INCREMENT PRIMARY KEY,
+    id_profession INT NOT NULL,
     nom_de_categorie VARCHAR(50) NOT NULL
+
+    CONSTRAINT fk_categorie_profession
+        FOREIGN KEY (id_profession)
+        REFERENCES Profession(Id_Profession)
+        ON DELETE CASCADE
 );
 
 -- =========================
@@ -135,10 +146,10 @@ INSERT INTO User_ (email, mdp, nom, prenom, tel) VALUES
 -- =========================
 -- PRESTATAIRES
 -- =========================
-INSERT INTO Prestataire (nom, prenom, profession) VALUES
-('Martin', 'Paul', 'dentiste'),
-('Durand', 'Sophie', 'generaliste'),
-('Seb', 'Cos', 'dev');
+INSERT INTO Prestataire (nom, prenom) VALUES
+('Martin', 'Paul'),
+('Durand', 'Sophie'),
+('Seb', 'Cos');
 
 -- =========================
 -- ADRESSES
@@ -168,4 +179,3 @@ INSERT INTO Rappel (id_RDV, delai, type) VALUES
 (1, '24h', 'Email'),
 (1, '1h', 'SMS'),
 (2, '2h', 'Email');
-
