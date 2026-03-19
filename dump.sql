@@ -2,6 +2,9 @@
 CREATE DATABASE IF NOT EXISTS rappelFacile DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE rappelFacile;
 
+CREATE USER IF NOT EXISTS 'rappelFacileUser'@'localhost' IDENTIFIED BY '*********';
+GRANT SELECT, INSERT, UPDATE, DELETE ON rappelFacile.* TO 'rappelFacileUser'@'localhost';
+
 DROP TABLE IF EXISTS Rappel;
 DROP TABLE IF EXISTS RDV;
 DROP TABLE IF EXISTS Local;
@@ -33,8 +36,8 @@ CREATE TABLE Prestataire (
     Id_Prestataire INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(50) NOT NULL,
     prenom VARCHAR(50) NOT NULL,
-    profession
-);
+    profession VARCHAR(50) NOT NULL
+    );
 
 -- =========================
 -- TABLE ADRESSE
@@ -132,9 +135,10 @@ INSERT INTO User_ (email, mdp, nom, prenom, tel) VALUES
 -- =========================
 -- PRESTATAIRES
 -- =========================
-INSERT INTO Prestataire (nom, prenom) VALUES
-('Martin', 'Paul'),
-('Durand', 'Sophie');
+INSERT INTO Prestataire (nom, prenom, profession) VALUES
+('Martin', 'Paul', 'dentiste'),
+('Durand', 'Sophie', 'generaliste'),
+('Seb', 'Cos', 'dev');
 
 -- =========================
 -- ADRESSES
@@ -164,3 +168,4 @@ INSERT INTO Rappel (id_RDV, delai, type) VALUES
 (1, '24h', 'Email'),
 (1, '1h', 'SMS'),
 (2, '2h', 'Email');
+
