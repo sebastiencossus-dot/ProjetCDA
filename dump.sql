@@ -69,7 +69,7 @@ CREATE TABLE Profession (
 CREATE TABLE Categorie (
     Id_Categorie INT AUTO_INCREMENT PRIMARY KEY,
     id_profession INT NOT NULL,
-    nom_de_categorie VARCHAR(50) NOT NULL
+    nom_de_categorie VARCHAR(50) NOT NULL,
 
     CONSTRAINT fk_categorie_profession
         FOREIGN KEY (id_profession)
