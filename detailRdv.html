@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Detail d'un rendez-vous</title>
+</head>
+<body>
+    <div class="Container">
+        <header class="HeaderBox">
+            <img class="HeaderBox-logo" src="images/logo.png" alt="Logo Rappel Facile">
+            <h1 class="HeaderBox-title">Rappel Facile</h1>
+            <div class="NavBox">
+                <i class="fa-solid fa-bars NavBox-burger"></i>
+                <i class="fa-solid fa-close NavBox-close"></i>
+                <div class="NavBox-toggleMenu">
+                    
+                    <nav class="NavBox-menuPrincipal">
+                        <a  class="NavBox-menuPrincipal-link" href="">Vos rendez-vous</a>
+                        <a href=""  class="NavBox-menuPrincipal-link">Vos prestataires</a>
+                        <a href=""  class="NavBox-menuPrincipal-link">Vos statistiques</a>
+                    </nav>
+                    <div class="NavBox-user">
+                        <img class="NavBox-user-avatar" src="images/avatar.jpg" alt="Avatar utilisateur">
+                        <p>Jessica</p>
+                        <a href="">Log out</a>
+                    </div>
+                    <nav class="NavBox-menuSecondaire">
+                        <a class="NavBox-menuSecondaire-link" href="">Contact</a>
+                        <a class="NavBox-menuSecondaire-link" href="">Cgu</a>
+                        <a class="NavBox-menuSecondaire-link" href="">Rgpd</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <main class="ContentBox2">
+            <h2 class="ContentBox2-title">Votre rendez-vous</h2>
+            <section class="ContentBox2-detailRdv">
+                <div class="ContentBox2-detailRdv-prestataire">
+                    <p class="ContentBox2-detailRdv-prestataire-nom">Dr Jean Dupont<br><span class="ContentBox2-detailRdv-prestataire-spe">Medecin generaliste</span></p><img src="images/alerte.png" alt="reglage alerte">
+                </div>
+                <p class="ContentBox2-detailRdv-title">Informations du rendez-vous</p>
+                <div class="ContentBox2-detailRdv-card fond1">
+                <p class="ContentBox2-detailRdv-card-left"><i class="fa-regular fa-calendar"></i> Jour</p>
+                <p class="ContentBox2-detailRdv-card-right">Lundi 15 octobre 2023</p>
+                </div>
+                <div class="ContentBox2-detailRdv-card fond2">
+                <p class="ContentBox2-detailRdv-card-left"><i class="fa-regular fa-alarm-clock RdvBox-card-clock"></i> Heure</p>
+                <p class="ContentBox2-detailRdv-card-right">14h30</p>
+                </div>
+                <div class="ContentBox2-detailRdv-card fond3">
+                <p class="ContentBox2-detailRdv-card-left"><i class="fa-regular fa-address-book"></i> Adresse</p>
+                <p class="ContentBox2-detailRdv-card-right">15 Rue de la Paix, 75000 Paris</p>
+                </div>
+                <div class="ContentBox2-detailRdv-card fond1">
+                <p class="ContentBox2-detailRdv-card-left"><i class="fa-solid fa-phone"></i> Telephone</p>
+                <p class="ContentBox2-detailRdv-card-right">01 23 45 67 89</p>
+                </div>
+                <div class="ContentBox2-detailRdv-card fond2">
+                <p class="ContentBox2-detailRdv-card-left"><i class="fa-solid fa-at"></i> Email</p>
+                <p class="ContentBox2-detailRdv-card-right">jessica.dupont@gmail.com</p>
+                </div>
+                <div class="ContentBox2-detailRdv-card fond3">
+                <p class="ContentBox2-detailRdv-card-left"><i class="fa-solid fa-book"></i> Motif du rendez-vous</p>
+                <p class="ContentBox2-detailRdv-card-right">Consultation annuelle</p>
+                </div>
+                <a class="ContentBox2-detailRdv-btn">Annuler le rendez-vous</a>
+                <a class="ContentBox2-detailRdv-btn btn2">Modifier le rendez-vous</a>
+                <div>
+                    <p class="ContentBox2-detailRdv-title">Ajouter une ordonnance</P>
+                    <input type="file" id="file" name="file" class="ContentBox2-detailRdv-input" placeholder="Telecharger votre ordonnance ici">
+                </div>
+            </section>        
+        </main> 
+        <footer class="FooterBox">
+            <nav    class="NavAdd">
+                <div class="NavAdd-nav">
+                    <a class="NavAdd-nav-link" href=""><img src="images/qrcode.png" alt="qrcode"><span class="NavAdd-nav-link-text">Aide pour rdv</span></a>
+                    <a class="NavAdd-nav-link" href=""><img src="images/doctor-add.png" alt=""><span class="NavAdd-nav-link-text">Nouveau prestataire</span></a>
+                    <a class="NavAdd-nav-link" href=""><img src="images/calendar-add.png" alt=""><span class="NavAdd-nav-link-text">Nouveau rdv</span></a>
+                </div>
+            </nav>
+            <nav class="NavFooter">
+                <a class="NavFooter-link" href="">Contact</a>
+                <a class="NavFooter-link" href="">Cgu</a>
+                <a class="NavFooter-link" href="">Rgpd</a>
+        </footer>
+    </div>
+</body>
+<script src="https://kit.fontawesome.com/0aa6008ea0.js" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+
+</html>

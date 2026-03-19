@@ -1,0 +1,17 @@
+@use 'variables' as *;
+
+body {
+    background-color: $backGroundColor;
+    font-family: $fontGeneral;
+    color: $fontColor;
+    margin: 0;
+    padding: 0;
+    
+}
+.Container {
+   min-width: 300px;
+    margin: auto;
+    @media screen and (min-width: 800px) {
+        width: 90%;
+    }
+}

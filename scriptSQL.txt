@@ -1,0 +1,88 @@
+
+
+CREATE TABLE User_ (
+    Id_User INTEGER PRIMARY KEY AUTOINCREMENT,
+    email VARCHAR(50),
+    mdp VARCHAR(50),
+    nom VARCHAR(50),
+    prenom VARCHAR(50),
+    tel VARCHAR(12)
+);
+
+CREATE TABLE Prestataire (
+    Id_Prestataire INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom VARCHAR(50),
+    prenom VARCHAR(50)
+);
+
+CREATE TABLE Adresse (
+    Id_Adresse INTEGER PRIMARY KEY AUTOINCREMENT,
+    rue VARCHAR(50),
+    numero VARCHAR(50),
+    codePostal VARCHAR(50),
+    ville VARCHAR(50)
+);
+
+CREATE TABLE Profession (
+    Id_Profession INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom VARCHAR(50)
+);
+
+CREATE TABLE Categorie (
+    Id_Categorie INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom_de_categorie VARCHAR(50)
+);
+
+CREATE TABLE RDV (
+    Id_RDV INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_user INTEGER,
+    id_prestataire INTEGER,
+    date_ DATETIME,
+    IsOk BOOLEAN,
+    FOREIGN KEY (id_user) REFERENCES User_(Id_User),
+    FOREIGN KEY (id_prestataire) REFERENCES Prestataire(Id_Prestataire)
+);
+
+CREATE TABLE Rappel (
+    Id_Rappel INTEGER PRIMARY KEY AUTOINCREMENT,
+    delai VARCHAR(50),
+    type VARCHAR(50)
+);
+
+
+
+
+CREATE TABLE Habite_a (
+    id_prestataire INTEGER,
+    id_adresse INTEGER,
+    PRIMARY KEY (id_prestataire, id_adresse),
+    FOREIGN KEY (id_prestataire) REFERENCES Prestataire(Id_Prestataire),
+    FOREIGN KEY (id_adresse) REFERENCES Adresse(Id_Adresse)
+);
+
+
+CREATE TABLE Exerce (
+    Id_Prestataire INTEGER,
+    Id_Profession INTEGER,
+    PRIMARY KEY (Id_Prestataire, Id_Profession),
+    FOREIGN KEY (Id_Prestataire) REFERENCES Prestataire(Id_Prestataire),
+    FOREIGN KEY (Id_Profession) REFERENCES Profession(Id_Profession)
+);
+
+
+CREATE TABLE Pour_la (
+    Id_Profession INTEGER,
+    Id_Categorie INTEGER,
+    PRIMARY KEY (Id_Profession, Id_Categorie),
+    FOREIGN KEY (Id_Profession) REFERENCES Profession(Id_Profession),
+    FOREIGN KEY (Id_Categorie) REFERENCES Categorie(Id_Categorie)
+);
+
+
+CREATE TABLE Concerne (
+    Id_RDV INTEGER,
+    Id_Rappel INTEGER,
+    PRIMARY KEY (Id_RDV, Id_Rappel),
+    FOREIGN KEY (Id_RDV) REFERENCES RDV(Id_RDV),
+    FOREIGN KEY (Id_Rappel) REFERENCES Rappel(Id_Rappel)
+);
