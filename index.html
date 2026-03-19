@@ -3,29 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <title>Rappel Facile</title>
 </head>
 <body>
-    <main>
-        <header>
-            <img src="logo.png" alt="Logo Rappel Facile">
-            <h1>Rappel Facile</h1>
-            <icone burger></icone>
+    <div class="Container">
+        <header class="HeaderBox">
+            <img class="HeaderBox-logo" src="images/logo.png" alt="Logo Rappel Facile">
+            <h1 class="HeaderBox-title">Rappel Facile</h1>
+            <div class="NavBox">
+                <i class="fa-solid fa-bars NavBox-burger"></i>
+                <i class="fa-solid fa-close NavBox-close"></i>
+                <div class="NavBox-toggleMenu">
+                    
+                    <nav class="NavBox-menuPrincipal">
+                        <a  class="NavBox-menuPrincipal-link" href="">Vos rendez-vous</a>
+                        <a href=""  class="NavBox-menuPrincipal-link">Vos prestataires</a>
+                        <a href=""  class="NavBox-menuPrincipal-link">Vos statistiques</a>
+                    </nav>
+                    <div class="NavBox-user">
+                        <img class="NavBox-user-avatar" src="images/avatar.jpg" alt="Avatar utilisateur">
+                        <p>Jessica</p>
+                        <a href="">Log out</a>
+                    </div>
+                    <nav class="NavBox-menuSecondaire">
+                        <a class="NavBox-menuSecondaire-link" href="">Contact</a>
+                        <a class="NavBox-menuSecondaire-link" href="">Cgu</a>
+                        <a class="NavBox-menuSecondaire-link" href="">Rgpd</a>
+                    </nav>
+                </div>
+            </div>
         </header>
-        <section>
-            <h2>Titre de la page</h2>
-            <section>
-                <div>rdv du jour</div>
-                <div>autre rdv</div>
-                <div>en attente</div>
-            </section>
-        </section>
-        <footer>
-            <nav>
-                <icone qrcode></icone>
-                <icone addPresta></icone>
-                <icone addRdv></icone>
+        <main class="ContentBox">
+            <h2 class="ContentBox-title">Vos rendez-vous</h2>
+            <div class="ContentBox-rdvBox">
+                <div class="ContentBox-rdvBox">
+                    <section class="ContentBox-rdvBox RdvBox jour">
+                        <h2 class="RdvBox-title">Rendez-vous du jour</h2>
+                        <div class="RdvBox-card">
+                            <a href="detailRdv.html" class="RdvBox-card-link"><i class="fa-regular fa-alarm-clock RdvBox-card-clock"></i></a>
+                            <p class="RdvBox-card-text"><span class="RdvBox-card-text-time"><span class="RdvBox-card-text-time">10:00</span><br><span class="RdvBox-card-text-motif">Prescription médicale</span>         
+                            </p>
+                            <p class="RdvBox-card-prestataire">Dr. Martin Dupont</p>
+                                            
+                        </div>
+                        <div class="RdvBox-card">
+                            <i class="fa-regular fa-alarm-clock RdvBox-card-clock"></i>
+                            <p class="RdvBox-card-text"><span class="RdvBox-card-text-time"><span class="RdvBox-card-text-time">10:00</span><br><span class="RdvBox-card-text-motif">Prescription médicale</span>         
+                            </p>
+                            <p class="RdvBox-card-prestataire">Dr. Martin Dupont</p>
+                                            
+                        </div>
+
+                    </section>
+                    <section class="ContentBox-rdvBox RdvBox attente">
+                        <h2 class="RdvBox-title">En attente de validation</h2>
+                        <div class="RdvBox-card">
+                            <i class="fa-regular fa-calendar RdvBox-card-clock"></i>
+                            <p class="RdvBox-card-text"><span class="RdvBox-card-text-time"><span class="RdvBox-card-text-time">15 octobre 2023 à 10:00</span><br><span class="RdvBox-card-text-motif">Prescription médicale</span>         
+                            </p>
+                            <p class="RdvBox-card-prestataire"><i class="fa-regular fa-square-check"></i> <i class="fa-solid fa-ban"></i>                 </p>
+                                            
+                        </div>
+                        
+
+                    </section>
+                </div>
+                <section class="ContentBox-rdvBox RdvBox autre">
+                    <h2 class="RdvBox-title">Autres RDV</h2>
+                    <div class="RdvBox-card">
+                        <i class="fa-regular fa-calendar RdvBox-card-clock"></i>
+                        <p class="RdvBox-card-text"><span class="RdvBox-card-text-time"><span class="RdvBox-card-text-time">15 octobre 2023 à 10:00</span><br><span class="RdvBox-card-text-motif">Prescription médicale</span>         
+                        </p>
+                        <p class="RdvBox-card-prestataire">Modifier Details</p>
+                                        
+                    </div>
+                    <div class="RdvBox-card">
+                        <i class="fa-regular fa-calendar RdvBox-card-clock"></i>
+                        <p class="RdvBox-card-text"><span class="RdvBox-card-text-time"><span class="RdvBox-card-text-time">15 octobre 2023 à 10:00</span><br><span class="RdvBox-card-text-motif">Prescription médicale</span>         
+                        </p>
+                        <p class="RdvBox-card-prestataire">Modifier Details</p>
+                                        
+                    </div>
+                     <div class="RdvBox-card">
+                        <i class="fa-regular fa-calendar RdvBox-card-clock"></i>
+                        <p class="RdvBox-card-text"><span class="RdvBox-card-text-time"><span class="RdvBox-card-text-time">15 octobre 2023 à 10:00</span><br><span class="RdvBox-card-text-motif">Prescription médicale</span>         
+                        </p>
+                        <p class="RdvBox-card-prestataire">Modifier Details</p>
+                                        
+                    </div>
+                     <div class="RdvBox-card">
+                        <i class="fa-regular fa-calendar RdvBox-card-clock"></i>
+                        <p class="RdvBox-card-text"><span class="RdvBox-card-text-time"><span class="RdvBox-card-text-time">15 octobre 2023 à 10:00</span><br><span class="RdvBox-card-text-motif">Prescription médicale</span>         
+                        </p>
+                        <p class="RdvBox-card-prestataire">Modifier Details</p>
+                                        
+                    </div>
+                     <div class="RdvBox-card">
+                        <i class="fa-regular fa-calendar RdvBox-card-clock"></i>
+                        <p class="RdvBox-card-text"><span class="RdvBox-card-text-time"><span class="RdvBox-card-text-time">15 octobre 2023 à 10:00</span><br><span class="RdvBox-card-text-motif">Prescription médicale</span>         
+                        </p>
+                        <p class="RdvBox-card-prestataire">Modifier Details</p>
+                                        
+                    </div>
+                     <div class="RdvBox-card">
+                        <i class="fa-regular fa-calendar RdvBox-card-clock"></i>
+                        <p class="RdvBox-card-text"><span class="RdvBox-card-text-time"><span class="RdvBox-card-text-time">15 octobre 2023 à 10:00</span><br><span class="RdvBox-card-text-motif">Prescription médicale</span>         
+                        </p>
+                        <p class="RdvBox-card-prestataire">Modifier Details</p>
+                                        
+                    </div>
+                    
+ 
+                </section>
+            </div>
+        </main>
+        <footer class="FooterBox">
+            <nav    class="NavAdd">
+                <div class="NavAdd-nav">
+                    <a class="NavAdd-nav-link" href=""><img src="images/qrcode.png" alt="qrcode"><span class="NavAdd-nav-link-text">Aide pour rdv</span></a>
+                    <a class="NavAdd-nav-link" href=""><img src="images/doctor-add.png" alt=""><span class="NavAdd-nav-link-text">Nouveau prestataire</span></a>
+                    <a class="NavAdd-nav-link" href=""><img src="images/calendar-add.png" alt=""><span class="NavAdd-nav-link-text">Nouveau rdv</span></a>
+                </div>
             </nav>
-    </main>
+            <nav class="NavFooter">
+                <a class="NavFooter-link" href="">Contact</a>
+                <a class="NavFooter-link" href="">Cgu</a>
+                <a class="NavFooter-link" href="">Rgpd</a>
+        </footer>
+    </div>
 </body>
+<script src="https://kit.fontawesome.com/0aa6008ea0.js" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+
 </html>

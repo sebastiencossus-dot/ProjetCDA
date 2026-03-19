@@ -4,7 +4,7 @@ USE rappelFacile;
 
 DROP TABLE IF EXISTS Rappel;
 DROP TABLE IF EXISTS RDV;
-DROP TABLE IF EXISTS Habite_a;
+DROP TABLE IF EXISTS Local;
 DROP TABLE IF EXISTS Profession;
 DROP TABLE IF EXISTS Categorie;
 DROP TABLE IF EXISTS Adresse;
@@ -102,18 +102,18 @@ CREATE TABLE Rappel (
 );
 
 -- =========================
--- TABLE HABITE_A
+-- TABLE LOCAL
 -- =========================
-CREATE TABLE Habite_a (
+CREATE TABLE Local (
     id_prestataire INT PRIMARY KEY,
     id_adresse INT NOT NULL,
 
-    CONSTRAINT fk_habite_prestataire
+    CONSTRAINT fk_local_prestataire
         FOREIGN KEY (id_prestataire)
         REFERENCES Prestataire(Id_Prestataire)
         ON DELETE CASCADE,
 
-    CONSTRAINT fk_habite_adresse
+    CONSTRAINT fk_local_adresse
         FOREIGN KEY (id_adresse)
         REFERENCES Adresse(Id_Adresse)
         ON DELETE CASCADE
@@ -146,9 +146,9 @@ INSERT INTO Adresse (rue, numero, codePostal, ville) VALUES
 ('Boulevard National', '12', '13001', 'Marseille');
 
 -- =========================
--- HABITE_A
+-- LOCAL
 -- =========================
-INSERT INTO Habite_a (id_prestataire, id_adresse) VALUES
+INSERT INTO Local (id_prestataire, id_adresse) VALUES
 (1, 1),
 (2, 2);
 
