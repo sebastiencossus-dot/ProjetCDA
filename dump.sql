@@ -13,143 +13,153 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON rappelFacile.* TO 'rappelFacileUser'@'lo
 -- =========================
 -- DROP TABLES
 -- =========================
+DROP TABLE IF EXISTS rdv;
 DROP TABLE IF EXISTS Rappel;
-DROP TABLE IF EXISTS RDV;
+DROP TABLE IF EXISTS Exerce;
 DROP TABLE IF EXISTS Local;
-DROP TABLE IF EXISTS Categorie;
 DROP TABLE IF EXISTS Profession;
+DROP TABLE IF EXISTS Categorie;
 DROP TABLE IF EXISTS Adresse;
 DROP TABLE IF EXISTS Prestataire;
 DROP TABLE IF EXISTS User_;
 
 -- =========================
--- TABLE USER
+-- USER
 -- =========================
 CREATE TABLE User_ (
     id_user INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    mdp VARCHAR(255) NOT NULL,
-    nom VARCHAR(50) NOT NULL,
-    prenom VARCHAR(50) NOT NULL,
-    tel VARCHAR(20),
-    isValide BOOLEAN DEFAULT TRUE
+    email VARCHAR(100),
+    mdp VARCHAR(50),
+    nom VARCHAR(50),
+    prenom VARCHAR(50),
+    tel VARCHAR(10),
+    photo VARCHAR(50),
+    siValide BOOLEAN DEFAULT TRUE
 );
 
 -- =========================
--- TABLE PRESTATAIRE
+-- PRESTATAIRE
 -- =========================
 CREATE TABLE Prestataire (
     id_prestataire INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(50) NOT NULL,
-    prenom VARCHAR(50) NOT NULL,
-    isValide BOOLEAN DEFAULT TRUE
+    nom VARCHAR(50),
+    prenom VARCHAR(50),
+    siValide BOOLEAN DEFAULT TRUE
 );
 
 -- =========================
--- TABLE ADRESSE
+-- ADRESSE
 -- =========================
 CREATE TABLE Adresse (
     id_adresse INT AUTO_INCREMENT PRIMARY KEY,
+    ville VARCHAR(50),
     rue VARCHAR(100),
-    numero VARCHAR(10),
-    code_postal VARCHAR(10),
-    ville VARCHAR(50)
+    numero VARCHAR(8),
+    codePostal VARCHAR(7)
 );
 
 -- =========================
--- TABLE PROFESSION
+-- CATEGORIE
+-- =========================
+CREATE TABLE Categorie (
+    id_categorie INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(20)
+);
+
+-- =========================
+-- PROFESSION
 -- =========================
 CREATE TABLE Profession (
     id_profession INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(50) NOT NULL,
-    isValide BOOLEAN DEFAULT TRUE,
-    id_prestataire INT NOT NULL,
+    nom VARCHAR(20),
+    siValide BOOLEAN DEFAULT TRUE,
+    id_categorie INT,
 
-    CONSTRAINT fk_profession_prestataire
-        FOREIGN KEY (id_prestataire)
+    FOREIGN KEY (id_categorie)
+        REFERENCES Categorie(id_categorie)
+        ON DELETE SET NULL
+);
+
+-- =========================
+-- EXERCE (relation N-N)
+-- =========================
+CREATE TABLE Exerce (
+    id_profession INT,
+    id_prestataire INT,
+    siValide BOOLEAN DEFAULT TRUE,
+
+    PRIMARY KEY (id_profession, id_prestataire),
+
+    FOREIGN KEY (id_profession)
+        REFERENCES Profession(id_profession)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (id_prestataire)
         REFERENCES Prestataire(id_prestataire)
         ON DELETE CASCADE
 );
 
 -- =========================
--- TABLE CATEGORIE
--- =========================
-CREATE TABLE Categorie (
-    id_categorie INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(50) NOT NULL,
-    id_profession INT,
-
-    CONSTRAINT fk_categorie_profession
-        FOREIGN KEY (id_profession)
-        REFERENCES Profession(id_profession)
-        ON DELETE SET NULL
-);
-
--- =========================
--- TABLE LOCAL (relation prestataire/adresse)
+-- LOCAL (prestataire/adresse)
 -- =========================
 CREATE TABLE Local (
     id_prestataire INT,
     id_adresse INT,
+    siValide BOOLEAN DEFAULT TRUE,
+
     PRIMARY KEY (id_prestataire, id_adresse),
 
-    CONSTRAINT fk_local_prestataire
-        FOREIGN KEY (id_prestataire)
+    FOREIGN KEY (id_prestataire)
         REFERENCES Prestataire(id_prestataire)
         ON DELETE CASCADE,
 
-    CONSTRAINT fk_local_adresse
-        FOREIGN KEY (id_adresse)
+    FOREIGN KEY (id_adresse)
         REFERENCES Adresse(id_adresse)
         ON DELETE CASCADE
 );
 
 -- =========================
--- TABLE RDV
+-- RAPPEL
+-- =========================
+CREATE TABLE Rappel (
+    id_rappel INT AUTO_INCREMENT PRIMARY KEY,
+    delai INT,
+    typeAlerte VARCHAR(10)
+);
+
+-- =========================
+-- RDV
 -- =========================
 CREATE TABLE RDV (
     id_rdv INT AUTO_INCREMENT PRIMARY KEY,
-    dateRdv DATETIME NOT NULL,
-    isOk BOOLEAN DEFAULT FALSE,
+    dateRdv DATE,
+    siOk BOOLEAN,
 
-    id_user INT,
     id_prestataire INT,
+    id_rappel INT,
+    id_user INT,
     id_adresse INT,
 
-    CONSTRAINT fk_rdv_user
-        FOREIGN KEY (id_user)
-        REFERENCES User_(id_user)
-        ON DELETE SET NULL,
-
-    CONSTRAINT fk_rdv_prestataire
-        FOREIGN KEY (id_prestataire)
+    FOREIGN KEY (id_prestataire)
         REFERENCES Prestataire(id_prestataire)
         ON DELETE SET NULL,
 
-    CONSTRAINT fk_rdv_adresse
-        FOREIGN KEY (id_adresse)
+    FOREIGN KEY (id_rappel)
+        REFERENCES Rappel(id_rappel)
+        ON DELETE SET NULL,
+
+    FOREIGN KEY (id_user)
+        REFERENCES User_(id_user)
+        ON DELETE SET NULL,
+
+    FOREIGN KEY (id_adresse)
         REFERENCES Adresse(id_adresse)
         ON DELETE SET NULL
 );
 
 -- =========================
--- TABLE RAPPEL
--- =========================
-CREATE TABLE Rappel (
-    id_rappel INT AUTO_INCREMENT PRIMARY KEY,
-    delai VARCHAR(50),
-    type VARCHAR(50),
-    id_rdv INT NOT NULL,
-
-    CONSTRAINT fk_rappel_rdv
-        FOREIGN KEY (id_rdv)
-        REFERENCES RDV(id_rdv)
-        ON DELETE CASCADE
-);
-
--- ============================================================
 -- 🔥 DONNEES DE TEST
--- ============================================================
+-- =========================
 
 -- USERS
 INSERT INTO User_ (email, mdp, nom, prenom, tel) VALUES
@@ -162,32 +172,36 @@ INSERT INTO Prestataire (nom, prenom) VALUES
 ('Durand', 'Sophie');
 
 -- ADRESSES
-INSERT INTO Adresse (rue, numero, code_postal, ville) VALUES
-('Rue Victor Hugo', '10', '75001', 'Paris'),
-('Boulevard National', '25', '13001', 'Marseille');
+INSERT INTO Adresse (ville, rue, numero, codePostal) VALUES
+('Paris', 'Rue Victor Hugo', '10', '75001'),
+('Marseille', 'Boulevard National', '25', '13001');
 
--- PROFESSION
-INSERT INTO Profession (nom, id_prestataire) VALUES
+-- CATEGORIES
+INSERT INTO Categorie (nom) VALUES
+('Santé'),
+('Beauté');
+
+-- PROFESSIONS
+INSERT INTO Profession (nom, id_categorie) VALUES
 ('Médecin', 1),
 ('Coiffeur', 2);
 
--- CATEGORIE
-INSERT INTO Categorie (nom, id_profession) VALUES
-('Santé', 1),
-('Beauté', 2);
+-- EXERCE
+INSERT INTO Exerce VALUES
+(1,1,TRUE),
+(2,2,TRUE);
 
 -- LOCAL
-INSERT INTO Local (id_prestataire, id_adresse) VALUES
-(1,1),
-(2,2);
-
--- RDV
-INSERT INTO RDV (dateRdv, isOk, id_user, id_prestataire, id_adresse) VALUES
-('2026-04-01 10:00:00', TRUE, 1, 1, 1),
-('2026-04-02 15:30:00', FALSE, 2, 2, 2);
+INSERT INTO Local VALUES
+(1,1,TRUE),
+(2,2,TRUE);
 
 -- RAPPELS
-INSERT INTO Rappel (delai, type, id_rdv) VALUES
-('24h', 'Email', 1),
-('1h', 'SMS', 1),
-('2h', 'Email', 2);
+INSERT INTO Rappel (delai, typeAlerte) VALUES
+(24, 'Email'),
+(1, 'SMS');
+
+-- RDV
+INSERT INTO RDV (dateRdv, siOk, id_prestataire, id_rappel, id_user, id_adresse) VALUES
+('2026-04-01', TRUE, 1, 1, 1, 1),
+('2026-04-02', FALSE, 2, 2, 2, 2);
